@@ -33,3 +33,6 @@ flutter:
   assets:
     - assets/data/monsters.json
     - assets/data/dungeons.json
+    - assets/data/merchants.json
+    - assets/data/trainers.json
+    - assets/data/shop_items.json

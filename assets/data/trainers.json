@@ -1,0 +1,32 @@
+{
+  "trainers": [
+    {
+      "id": "combat_trainer",
+      "nameKo": "전투 교관 그레이",
+      "icon": "⚔️",
+      "mapId": "training_ground",
+      "description": "신규 모험가에게 기본 전투 기술을 가르치는 교관입니다.",
+      "dialogues": {
+        "greeting": "훈련하러 왔나? 좋아!",
+        "train": "자세를 낮추고, 집중해!",
+        "success": "잘했어. 점점 나아지고 있군.",
+        "notEnoughGold": "훈련에도 비용이 든다네.",
+        "farewell": "꾸준히 훈련하게."
+      }
+    },
+    {
+      "id": "arena_trainer",
+      "nameKo": "투기장 조련사 막시무스",
+      "icon": "🏟️",
+      "mapId": "arena",
+      "description": "투기장에서 고급 전투 기술을 가르치는 베테랑 전사입니다.",
+      "dialogues": {
+        "greeting": "강해지고 싶나? 잘 찾아왔다.",
+        "train": "실전이 최고의 스승이지!",
+        "success": "이제 좀 전사다워졌군.",
+        "notEnoughGold": "먼저 돈을 벌어와.",
+        "farewell": "다음엔 더 강해져서 와."
+      }
+    }
+  ]
+}

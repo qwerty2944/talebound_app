@@ -150,6 +150,48 @@ Color battleLogColor(String line) {
   return AppColors.textMuted;
 }
 
+/// 게임풍 스낵바(플로팅 + 이모지 아이콘 + 색 테두리). 거래/훈련 피드백 공용.
+void showGameSnack(
+  ScaffoldMessengerState messenger,
+  String message, {
+  String? detail,
+  String icon = 'ℹ️',
+  Color tint = AppColors.accent,
+}) {
+  messenger.hideCurrentSnackBar();
+  messenger.showSnackBar(
+    SnackBar(
+      backgroundColor: AppColors.surfaceAlt,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(color: tint.withValues(alpha: 0.6)),
+      ),
+      content: Row(
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 18)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(message,
+                    style: const TextStyle(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w600)),
+                if (detail != null)
+                  Text(detail,
+                      style: const TextStyle(
+                          color: AppColors.textMuted, fontSize: 12)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 /// 섹션 소제목(장식 라인 + 라벨).
 class SectionLabel extends StatelessWidget {
   const SectionLabel(this.text, {super.key, this.icon});
