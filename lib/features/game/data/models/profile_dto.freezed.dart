@@ -302,7 +302,7 @@ $ProfileDtoCopyWith<$Res>? get data {
 /// @nodoc
 mixin _$ProfileDto {
 
- int get level; int get experience; int get gold; int get gems;@JsonKey(name: 'current_hp') int? get currentHp;@JsonKey(name: 'current_mp') int? get currentMp; int get fatigue;@JsonKey(name: 'max_fatigue') int get maxFatigue;@JsonKey(name: 'current_map_id') String? get currentMapId; Map<String, dynamic>? get equipment; CharacterInfoDto? get character;
+ int get level; int get experience; int get gold; int get gems;@JsonKey(name: 'current_hp') int? get currentHp;@JsonKey(name: 'current_mp') int? get currentMp; int get fatigue;@JsonKey(name: 'max_fatigue') int get maxFatigue;@JsonKey(name: 'current_map_id') String? get currentMapId; Map<String, dynamic>? get equipment; CharacterInfoDto? get character; List<InjuryDto> get injuries;
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -315,16 +315,16 @@ $ProfileDtoCopyWith<ProfileDto> get copyWith => _$ProfileDtoCopyWithImpl<Profile
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other.equipment, equipment)&&(identical(other.character, character) || other.character == character));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other.equipment, equipment)&&(identical(other.character, character) || other.character == character)&&const DeepCollectionEquality().equals(other.injuries, injuries));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(equipment),character);
+int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(equipment),character,const DeepCollectionEquality().hash(injuries));
 
 @override
 String toString() {
-  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character)';
+  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character, injuries: $injuries)';
 }
 
 
@@ -335,7 +335,7 @@ abstract mixin class $ProfileDtoCopyWith<$Res>  {
   factory $ProfileDtoCopyWith(ProfileDto value, $Res Function(ProfileDto) _then) = _$ProfileDtoCopyWithImpl;
 @useResult
 $Res call({
- int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character
+ int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character, List<InjuryDto> injuries
 });
 
 
@@ -352,7 +352,7 @@ class _$ProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,Object? injuries = null,}) {
   return _then(_self.copyWith(
 level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
@@ -365,7 +365,8 @@ as int,maxFatigue: null == maxFatigue ? _self.maxFatigue : maxFatigue // ignore:
 as int,currentMapId: freezed == currentMapId ? _self.currentMapId : currentMapId // ignore: cast_nullable_to_non_nullable
 as String?,equipment: freezed == equipment ? _self.equipment : equipment // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
-as CharacterInfoDto?,
+as CharacterInfoDto?,injuries: null == injuries ? _self.injuries : injuries // ignore: cast_nullable_to_non_nullable
+as List<InjuryDto>,
   ));
 }
 /// Create a copy of ProfileDto
@@ -462,10 +463,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character,  List<InjuryDto> injuries)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileDto() when $default != null:
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character,_that.injuries);case _:
   return orElse();
 
 }
@@ -483,10 +484,10 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character,  List<InjuryDto> injuries)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileDto():
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character,_that.injuries);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -503,10 +504,10 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character,  List<InjuryDto> injuries)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileDto() when $default != null:
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character,_that.injuries);case _:
   return null;
 
 }
@@ -518,7 +519,7 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 @JsonSerializable()
 
 class _ProfileDto extends ProfileDto {
-  const _ProfileDto({this.level = 1, this.experience = 0, this.gold = 0, this.gems = 0, @JsonKey(name: 'current_hp') this.currentHp, @JsonKey(name: 'current_mp') this.currentMp, this.fatigue = 0, @JsonKey(name: 'max_fatigue') this.maxFatigue = 100, @JsonKey(name: 'current_map_id') this.currentMapId, final  Map<String, dynamic>? equipment, this.character}): _equipment = equipment,super._();
+  const _ProfileDto({this.level = 1, this.experience = 0, this.gold = 0, this.gems = 0, @JsonKey(name: 'current_hp') this.currentHp, @JsonKey(name: 'current_mp') this.currentMp, this.fatigue = 0, @JsonKey(name: 'max_fatigue') this.maxFatigue = 100, @JsonKey(name: 'current_map_id') this.currentMapId, final  Map<String, dynamic>? equipment, this.character, final  List<InjuryDto> injuries = const <InjuryDto>[]}): _equipment = equipment,_injuries = injuries,super._();
   factory _ProfileDto.fromJson(Map<String, dynamic> json) => _$ProfileDtoFromJson(json);
 
 @override@JsonKey() final  int level;
@@ -540,6 +541,13 @@ class _ProfileDto extends ProfileDto {
 }
 
 @override final  CharacterInfoDto? character;
+ final  List<InjuryDto> _injuries;
+@override@JsonKey() List<InjuryDto> get injuries {
+  if (_injuries is EqualUnmodifiableListView) return _injuries;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_injuries);
+}
+
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
@@ -554,16 +562,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other._equipment, _equipment)&&(identical(other.character, character) || other.character == character));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other._equipment, _equipment)&&(identical(other.character, character) || other.character == character)&&const DeepCollectionEquality().equals(other._injuries, _injuries));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(_equipment),character);
+int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(_equipment),character,const DeepCollectionEquality().hash(_injuries));
 
 @override
 String toString() {
-  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character)';
+  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character, injuries: $injuries)';
 }
 
 
@@ -574,7 +582,7 @@ abstract mixin class _$ProfileDtoCopyWith<$Res> implements $ProfileDtoCopyWith<$
   factory _$ProfileDtoCopyWith(_ProfileDto value, $Res Function(_ProfileDto) _then) = __$ProfileDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character
+ int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character, List<InjuryDto> injuries
 });
 
 
@@ -591,7 +599,7 @@ class __$ProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,Object? injuries = null,}) {
   return _then(_ProfileDto(
 level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
@@ -604,7 +612,8 @@ as int,maxFatigue: null == maxFatigue ? _self.maxFatigue : maxFatigue // ignore:
 as int,currentMapId: freezed == currentMapId ? _self.currentMapId : currentMapId // ignore: cast_nullable_to_non_nullable
 as String?,equipment: freezed == equipment ? _self._equipment : equipment // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
-as CharacterInfoDto?,
+as CharacterInfoDto?,injuries: null == injuries ? _self._injuries : injuries // ignore: cast_nullable_to_non_nullable
+as List<InjuryDto>,
   ));
 }
 
@@ -621,6 +630,278 @@ $CharacterInfoDtoCopyWith<$Res>? get character {
     return _then(_self.copyWith(character: value));
   });
 }
+}
+
+
+/// @nodoc
+mixin _$InjuryDto {
+
+ String get type; String? get source; String? get occurredAt; String? get naturalHealAt;
+/// Create a copy of InjuryDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$InjuryDtoCopyWith<InjuryDto> get copyWith => _$InjuryDtoCopyWithImpl<InjuryDto>(this as InjuryDto, _$identity);
+
+  /// Serializes this InjuryDto to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InjuryDto&&(identical(other.type, type) || other.type == type)&&(identical(other.source, source) || other.source == source)&&(identical(other.occurredAt, occurredAt) || other.occurredAt == occurredAt)&&(identical(other.naturalHealAt, naturalHealAt) || other.naturalHealAt == naturalHealAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type,source,occurredAt,naturalHealAt);
+
+@override
+String toString() {
+  return 'InjuryDto(type: $type, source: $source, occurredAt: $occurredAt, naturalHealAt: $naturalHealAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $InjuryDtoCopyWith<$Res>  {
+  factory $InjuryDtoCopyWith(InjuryDto value, $Res Function(InjuryDto) _then) = _$InjuryDtoCopyWithImpl;
+@useResult
+$Res call({
+ String type, String? source, String? occurredAt, String? naturalHealAt
+});
+
+
+
+
+}
+/// @nodoc
+class _$InjuryDtoCopyWithImpl<$Res>
+    implements $InjuryDtoCopyWith<$Res> {
+  _$InjuryDtoCopyWithImpl(this._self, this._then);
+
+  final InjuryDto _self;
+  final $Res Function(InjuryDto) _then;
+
+/// Create a copy of InjuryDto
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? type = null,Object? source = freezed,Object? occurredAt = freezed,Object? naturalHealAt = freezed,}) {
+  return _then(_self.copyWith(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,occurredAt: freezed == occurredAt ? _self.occurredAt : occurredAt // ignore: cast_nullable_to_non_nullable
+as String?,naturalHealAt: freezed == naturalHealAt ? _self.naturalHealAt : naturalHealAt // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [InjuryDto].
+extension InjuryDtoPatterns on InjuryDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _InjuryDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _InjuryDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _InjuryDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _InjuryDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _InjuryDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _InjuryDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String type,  String? source,  String? occurredAt,  String? naturalHealAt)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _InjuryDto() when $default != null:
+return $default(_that.type,_that.source,_that.occurredAt,_that.naturalHealAt);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String type,  String? source,  String? occurredAt,  String? naturalHealAt)  $default,) {final _that = this;
+switch (_that) {
+case _InjuryDto():
+return $default(_that.type,_that.source,_that.occurredAt,_that.naturalHealAt);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String type,  String? source,  String? occurredAt,  String? naturalHealAt)?  $default,) {final _that = this;
+switch (_that) {
+case _InjuryDto() when $default != null:
+return $default(_that.type,_that.source,_that.occurredAt,_that.naturalHealAt);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _InjuryDto extends InjuryDto {
+  const _InjuryDto({this.type = 'light', this.source, this.occurredAt, this.naturalHealAt}): super._();
+  factory _InjuryDto.fromJson(Map<String, dynamic> json) => _$InjuryDtoFromJson(json);
+
+@override@JsonKey() final  String type;
+@override final  String? source;
+@override final  String? occurredAt;
+@override final  String? naturalHealAt;
+
+/// Create a copy of InjuryDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$InjuryDtoCopyWith<_InjuryDto> get copyWith => __$InjuryDtoCopyWithImpl<_InjuryDto>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$InjuryDtoToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InjuryDto&&(identical(other.type, type) || other.type == type)&&(identical(other.source, source) || other.source == source)&&(identical(other.occurredAt, occurredAt) || other.occurredAt == occurredAt)&&(identical(other.naturalHealAt, naturalHealAt) || other.naturalHealAt == naturalHealAt));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,type,source,occurredAt,naturalHealAt);
+
+@override
+String toString() {
+  return 'InjuryDto(type: $type, source: $source, occurredAt: $occurredAt, naturalHealAt: $naturalHealAt)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$InjuryDtoCopyWith<$Res> implements $InjuryDtoCopyWith<$Res> {
+  factory _$InjuryDtoCopyWith(_InjuryDto value, $Res Function(_InjuryDto) _then) = __$InjuryDtoCopyWithImpl;
+@override @useResult
+$Res call({
+ String type, String? source, String? occurredAt, String? naturalHealAt
+});
+
+
+
+
+}
+/// @nodoc
+class __$InjuryDtoCopyWithImpl<$Res>
+    implements _$InjuryDtoCopyWith<$Res> {
+  __$InjuryDtoCopyWithImpl(this._self, this._then);
+
+  final _InjuryDto _self;
+  final $Res Function(_InjuryDto) _then;
+
+/// Create a copy of InjuryDto
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? type = null,Object? source = freezed,Object? occurredAt = freezed,Object? naturalHealAt = freezed,}) {
+  return _then(_InjuryDto(
+type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String,source: freezed == source ? _self.source : source // ignore: cast_nullable_to_non_nullable
+as String?,occurredAt: freezed == occurredAt ? _self.occurredAt : occurredAt // ignore: cast_nullable_to_non_nullable
+as String?,naturalHealAt: freezed == naturalHealAt ? _self.naturalHealAt : naturalHealAt // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
 }
 
 

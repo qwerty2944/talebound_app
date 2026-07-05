@@ -60,6 +60,7 @@ class QuestReward {
 class Quest {
   const Quest({
     required this.id,
+    required this.npcId,
     required this.nameKo,
     required this.descriptionKo,
     required this.minLevel,
@@ -70,6 +71,9 @@ class Quest {
   });
 
   final String id;
+
+  /// 퀘스트를 주는 NPC id(guard_captain 등). 대화형 UI 그룹핑에 사용.
+  final String npcId;
   final String nameKo;
   final String descriptionKo;
   final int minLevel;

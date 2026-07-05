@@ -38,3 +38,5 @@ flutter:
     - assets/data/trainers.json
     - assets/data/shop_items.json
     - assets/data/items.json
+    - assets/data/healers.json
+    - assets/data/quest_npcs.json

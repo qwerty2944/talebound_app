@@ -30,6 +30,11 @@ _ProfileDto _$ProfileDtoFromJson(Map<String, dynamic> json) => _ProfileDto(
   character: json['character'] == null
       ? null
       : CharacterInfoDto.fromJson(json['character'] as Map<String, dynamic>),
+  injuries:
+      (json['injuries'] as List<dynamic>?)
+          ?.map((e) => InjuryDto.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <InjuryDto>[],
 );
 
 Map<String, dynamic> _$ProfileDtoToJson(_ProfileDto instance) =>
@@ -45,6 +50,22 @@ Map<String, dynamic> _$ProfileDtoToJson(_ProfileDto instance) =>
       'current_map_id': instance.currentMapId,
       'equipment': instance.equipment,
       'character': instance.character?.toJson(),
+      'injuries': instance.injuries.map((e) => e.toJson()).toList(),
+    };
+
+_InjuryDto _$InjuryDtoFromJson(Map<String, dynamic> json) => _InjuryDto(
+  type: json['type'] as String? ?? 'light',
+  source: json['source'] as String?,
+  occurredAt: json['occurredAt'] as String?,
+  naturalHealAt: json['naturalHealAt'] as String?,
+);
+
+Map<String, dynamic> _$InjuryDtoToJson(_InjuryDto instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'source': instance.source,
+      'occurredAt': instance.occurredAt,
+      'naturalHealAt': instance.naturalHealAt,
     };
 
 _CharacterInfoDto _$CharacterInfoDtoFromJson(Map<String, dynamic> json) =>

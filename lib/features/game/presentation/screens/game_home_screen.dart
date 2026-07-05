@@ -9,6 +9,7 @@ import '../../../auth/domain/entities/auth_session.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../battle/presentation/screens/monster_list_screen.dart';
 import '../../../dungeon/presentation/screens/dungeon_list_screen.dart';
+import '../../../healer/presentation/screens/healer_screen.dart';
 import '../../../inventory/presentation/screens/inventory_screen.dart';
 import '../../../quest/presentation/screens/quest_list_screen.dart';
 import '../../../shop/presentation/screens/shop_screen.dart';
@@ -156,6 +157,14 @@ class _HomeBody extends ConsumerWidget {
           subtitle: '무기·마법 숙련도를 단련한다',
           color: AppColors.mp,
           onTap: () => go(const TrainingScreen()),
+        ),
+        const SizedBox(height: 12),
+        _ActionButton(
+          icon: Icons.healing,
+          title: '치료',
+          subtitle: '치료사에게 부상을 치료받는다',
+          color: AppColors.hp,
+          onTap: () => go(const HealerScreen()),
         ),
       ],
     );

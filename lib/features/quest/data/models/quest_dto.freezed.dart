@@ -1094,7 +1094,7 @@ as int,
 /// @nodoc
 mixin _$QuestDto {
 
- String get id; String get nameKo; String get descriptionKo; int get minLevel; QuestObjectiveDto get objective; QuestRewardDto get rewards; String get status; QuestProgressDto get progress;
+ String get id; String get npcId; String get nameKo; String get descriptionKo; int get minLevel; QuestObjectiveDto get objective; QuestRewardDto get rewards; String get status; QuestProgressDto get progress;
 /// Create a copy of QuestDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1107,16 +1107,16 @@ $QuestDtoCopyWith<QuestDto> get copyWith => _$QuestDtoCopyWithImpl<QuestDto>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestDto&&(identical(other.id, id) || other.id == id)&&(identical(other.nameKo, nameKo) || other.nameKo == nameKo)&&(identical(other.descriptionKo, descriptionKo) || other.descriptionKo == descriptionKo)&&(identical(other.minLevel, minLevel) || other.minLevel == minLevel)&&(identical(other.objective, objective) || other.objective == objective)&&(identical(other.rewards, rewards) || other.rewards == rewards)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestDto&&(identical(other.id, id) || other.id == id)&&(identical(other.npcId, npcId) || other.npcId == npcId)&&(identical(other.nameKo, nameKo) || other.nameKo == nameKo)&&(identical(other.descriptionKo, descriptionKo) || other.descriptionKo == descriptionKo)&&(identical(other.minLevel, minLevel) || other.minLevel == minLevel)&&(identical(other.objective, objective) || other.objective == objective)&&(identical(other.rewards, rewards) || other.rewards == rewards)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,nameKo,descriptionKo,minLevel,objective,rewards,status,progress);
+int get hashCode => Object.hash(runtimeType,id,npcId,nameKo,descriptionKo,minLevel,objective,rewards,status,progress);
 
 @override
 String toString() {
-  return 'QuestDto(id: $id, nameKo: $nameKo, descriptionKo: $descriptionKo, minLevel: $minLevel, objective: $objective, rewards: $rewards, status: $status, progress: $progress)';
+  return 'QuestDto(id: $id, npcId: $npcId, nameKo: $nameKo, descriptionKo: $descriptionKo, minLevel: $minLevel, objective: $objective, rewards: $rewards, status: $status, progress: $progress)';
 }
 
 
@@ -1127,7 +1127,7 @@ abstract mixin class $QuestDtoCopyWith<$Res>  {
   factory $QuestDtoCopyWith(QuestDto value, $Res Function(QuestDto) _then) = _$QuestDtoCopyWithImpl;
 @useResult
 $Res call({
- String id, String nameKo, String descriptionKo, int minLevel, QuestObjectiveDto objective, QuestRewardDto rewards, String status, QuestProgressDto progress
+ String id, String npcId, String nameKo, String descriptionKo, int minLevel, QuestObjectiveDto objective, QuestRewardDto rewards, String status, QuestProgressDto progress
 });
 
 
@@ -1144,9 +1144,10 @@ class _$QuestDtoCopyWithImpl<$Res>
 
 /// Create a copy of QuestDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? nameKo = null,Object? descriptionKo = null,Object? minLevel = null,Object? objective = null,Object? rewards = null,Object? status = null,Object? progress = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? npcId = null,Object? nameKo = null,Object? descriptionKo = null,Object? minLevel = null,Object? objective = null,Object? rewards = null,Object? status = null,Object? progress = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,npcId: null == npcId ? _self.npcId : npcId // ignore: cast_nullable_to_non_nullable
 as String,nameKo: null == nameKo ? _self.nameKo : nameKo // ignore: cast_nullable_to_non_nullable
 as String,descriptionKo: null == descriptionKo ? _self.descriptionKo : descriptionKo // ignore: cast_nullable_to_non_nullable
 as String,minLevel: null == minLevel ? _self.minLevel : minLevel // ignore: cast_nullable_to_non_nullable
@@ -1266,10 +1267,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String npcId,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _QuestDto() when $default != null:
-return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
+return $default(_that.id,_that.npcId,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
   return orElse();
 
 }
@@ -1287,10 +1288,10 @@ return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.o
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String npcId,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)  $default,) {final _that = this;
 switch (_that) {
 case _QuestDto():
-return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
+return $default(_that.id,_that.npcId,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1307,10 +1308,10 @@ return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.o
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String npcId,  String nameKo,  String descriptionKo,  int minLevel,  QuestObjectiveDto objective,  QuestRewardDto rewards,  String status,  QuestProgressDto progress)?  $default,) {final _that = this;
 switch (_that) {
 case _QuestDto() when $default != null:
-return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
+return $default(_that.id,_that.npcId,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.objective,_that.rewards,_that.status,_that.progress);case _:
   return null;
 
 }
@@ -1322,10 +1323,11 @@ return $default(_that.id,_that.nameKo,_that.descriptionKo,_that.minLevel,_that.o
 @JsonSerializable()
 
 class _QuestDto extends QuestDto {
-  const _QuestDto({required this.id, this.nameKo = '퀘스트', this.descriptionKo = '', this.minLevel = 1, this.objective = const QuestObjectiveDto(), this.rewards = const QuestRewardDto(), this.status = 'available', this.progress = const QuestProgressDto()}): super._();
+  const _QuestDto({required this.id, this.npcId = '', this.nameKo = '퀘스트', this.descriptionKo = '', this.minLevel = 1, this.objective = const QuestObjectiveDto(), this.rewards = const QuestRewardDto(), this.status = 'available', this.progress = const QuestProgressDto()}): super._();
   factory _QuestDto.fromJson(Map<String, dynamic> json) => _$QuestDtoFromJson(json);
 
 @override final  String id;
+@override@JsonKey() final  String npcId;
 @override@JsonKey() final  String nameKo;
 @override@JsonKey() final  String descriptionKo;
 @override@JsonKey() final  int minLevel;
@@ -1347,16 +1349,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuestDto&&(identical(other.id, id) || other.id == id)&&(identical(other.nameKo, nameKo) || other.nameKo == nameKo)&&(identical(other.descriptionKo, descriptionKo) || other.descriptionKo == descriptionKo)&&(identical(other.minLevel, minLevel) || other.minLevel == minLevel)&&(identical(other.objective, objective) || other.objective == objective)&&(identical(other.rewards, rewards) || other.rewards == rewards)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuestDto&&(identical(other.id, id) || other.id == id)&&(identical(other.npcId, npcId) || other.npcId == npcId)&&(identical(other.nameKo, nameKo) || other.nameKo == nameKo)&&(identical(other.descriptionKo, descriptionKo) || other.descriptionKo == descriptionKo)&&(identical(other.minLevel, minLevel) || other.minLevel == minLevel)&&(identical(other.objective, objective) || other.objective == objective)&&(identical(other.rewards, rewards) || other.rewards == rewards)&&(identical(other.status, status) || other.status == status)&&(identical(other.progress, progress) || other.progress == progress));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,nameKo,descriptionKo,minLevel,objective,rewards,status,progress);
+int get hashCode => Object.hash(runtimeType,id,npcId,nameKo,descriptionKo,minLevel,objective,rewards,status,progress);
 
 @override
 String toString() {
-  return 'QuestDto(id: $id, nameKo: $nameKo, descriptionKo: $descriptionKo, minLevel: $minLevel, objective: $objective, rewards: $rewards, status: $status, progress: $progress)';
+  return 'QuestDto(id: $id, npcId: $npcId, nameKo: $nameKo, descriptionKo: $descriptionKo, minLevel: $minLevel, objective: $objective, rewards: $rewards, status: $status, progress: $progress)';
 }
 
 
@@ -1367,7 +1369,7 @@ abstract mixin class _$QuestDtoCopyWith<$Res> implements $QuestDtoCopyWith<$Res>
   factory _$QuestDtoCopyWith(_QuestDto value, $Res Function(_QuestDto) _then) = __$QuestDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String nameKo, String descriptionKo, int minLevel, QuestObjectiveDto objective, QuestRewardDto rewards, String status, QuestProgressDto progress
+ String id, String npcId, String nameKo, String descriptionKo, int minLevel, QuestObjectiveDto objective, QuestRewardDto rewards, String status, QuestProgressDto progress
 });
 
 
@@ -1384,9 +1386,10 @@ class __$QuestDtoCopyWithImpl<$Res>
 
 /// Create a copy of QuestDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? nameKo = null,Object? descriptionKo = null,Object? minLevel = null,Object? objective = null,Object? rewards = null,Object? status = null,Object? progress = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? npcId = null,Object? nameKo = null,Object? descriptionKo = null,Object? minLevel = null,Object? objective = null,Object? rewards = null,Object? status = null,Object? progress = null,}) {
   return _then(_QuestDto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,npcId: null == npcId ? _self.npcId : npcId // ignore: cast_nullable_to_non_nullable
 as String,nameKo: null == nameKo ? _self.nameKo : nameKo // ignore: cast_nullable_to_non_nullable
 as String,descriptionKo: null == descriptionKo ? _self.descriptionKo : descriptionKo // ignore: cast_nullable_to_non_nullable
 as String,minLevel: null == minLevel ? _self.minLevel : minLevel // ignore: cast_nullable_to_non_nullable

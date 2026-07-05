@@ -1,0 +1,51 @@
+{
+  "type": "quest",
+  "description": "퀘스트를 주는 NPC",
+  "npcs": [
+    {
+      "id": "village_elder",
+      "nameKo": "마을 장로",
+      "nameEn": "Village Elder",
+      "icon": "👴",
+      "mapId": "starting_village",
+      "description": "마을의 지혜로운 장로. 새로운 모험가들에게 조언을 해줍니다.",
+      "dialogues": {
+        "greeting": "젊은 모험가여, 어서 오게.",
+        "questAvailable": "자네에게 부탁할 일이 있네.",
+        "questComplete": "훌륭하네! 기대한 대로야.",
+        "noQuest": "지금은 특별히 부탁할 일이 없구만.",
+        "farewell": "조심해서 다녀오게."
+      }
+    },
+    {
+      "id": "innkeeper",
+      "nameKo": "여관 주인 마사",
+      "nameEn": "Innkeeper Martha",
+      "icon": "🍺",
+      "mapId": "starting_village",
+      "description": "여관을 운영하며 여행자들의 이야기를 듣는 것을 좋아합니다.",
+      "dialogues": {
+        "greeting": "어서 오세요, 여행자님!",
+        "questAvailable": "저기... 부탁드릴 게 있는데요.",
+        "questComplete": "정말 감사합니다!",
+        "noQuest": "편히 쉬어가세요.",
+        "farewell": "조심히 가세요!"
+      }
+    },
+    {
+      "id": "guard_captain",
+      "nameKo": "경비대장 롤랜드",
+      "nameEn": "Guard Captain Roland",
+      "icon": "🛡️",
+      "mapId": "starting_village",
+      "description": "마을 경비대를 이끄는 노련한 전사. 모험가들에게 토벌 임무를 맡깁니다.",
+      "dialogues": {
+        "greeting": "어이 모험가, 마침 잘 왔군. 손이 필요하던 참이야.",
+        "questAvailable": "마을을 위협하는 놈들이 있네. 처리해 줄 텐가?",
+        "questComplete": "훌륭해! 역시 자넬 믿길 잘했어.",
+        "noQuest": "지금은 맡길 임무가 없군. 나중에 다시 오게.",
+        "farewell": "몸 조심하게, 전사여."
+      }
+    }
+  ]
+}

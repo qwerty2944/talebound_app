@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../inventory/data/mappers/equipment_mapper.dart';
 import '../../domain/entities/character.dart';
+import '../../domain/entities/injury.dart';
 
 part 'profile_dto.freezed.dart';
 part 'profile_dto.g.dart';
@@ -32,6 +33,7 @@ abstract class ProfileDto with _$ProfileDto {
     @JsonKey(name: 'current_map_id') String? currentMapId,
     Map<String, dynamic>? equipment,
     CharacterInfoDto? character,
+    @Default(<InjuryDto>[]) List<InjuryDto> injuries,
   }) = _ProfileDto;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) =>
@@ -65,8 +67,33 @@ abstract class ProfileDto with _$ProfileDto {
         lck: stats.lck,
       ),
       equipment: EquipmentMapper.fromJson(equipment),
+      injuries: injuries.map((i) => i.toEntity()).toList(),
     );
   }
+}
+
+/// characters.injuries JSONB 배열 항목. 배열 순서 = heal injuryIndex.
+@freezed
+abstract class InjuryDto with _$InjuryDto {
+  const InjuryDto._();
+
+  const factory InjuryDto({
+    @Default('light') String type,
+    String? source,
+    String? occurredAt,
+    String? naturalHealAt,
+  }) = _InjuryDto;
+
+  factory InjuryDto.fromJson(Map<String, dynamic> json) =>
+      _$InjuryDtoFromJson(json);
+
+  Injury toEntity() => Injury(
+        severity: injurySeverityFromString(type),
+        source: source,
+        occurredAt: occurredAt,
+        naturalHealAt:
+            naturalHealAt == null ? null : DateTime.tryParse(naturalHealAt!),
+      );
 }
 
 @freezed

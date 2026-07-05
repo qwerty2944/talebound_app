@@ -61,6 +61,7 @@ Map<String, dynamic> _$QuestProgressDtoToJson(_QuestProgressDto instance) =>
 
 _QuestDto _$QuestDtoFromJson(Map<String, dynamic> json) => _QuestDto(
   id: json['id'] as String,
+  npcId: json['npcId'] as String? ?? '',
   nameKo: json['nameKo'] as String? ?? '퀘스트',
   descriptionKo: json['descriptionKo'] as String? ?? '',
   minLevel: (json['minLevel'] as num?)?.toInt() ?? 1,
@@ -78,6 +79,7 @@ _QuestDto _$QuestDtoFromJson(Map<String, dynamic> json) => _QuestDto(
 
 Map<String, dynamic> _$QuestDtoToJson(_QuestDto instance) => <String, dynamic>{
   'id': instance.id,
+  'npcId': instance.npcId,
   'nameKo': instance.nameKo,
   'descriptionKo': instance.descriptionKo,
   'minLevel': instance.minLevel,
