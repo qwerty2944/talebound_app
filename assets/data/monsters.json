@@ -1,0 +1,803 @@
+{
+  "monsters": [
+    {
+      "id": "rabbit",
+      "nameKo": "토끼",
+      "icon": "🐰",
+      "rank": "normal",
+      "level": 1,
+      "element": null,
+      "mapIds": [
+        "forest_entrance"
+      ],
+      "hp": 15,
+      "attack": 2,
+      "defense": 1,
+      "speed": 12,
+      "exp": 6,
+      "gold": 2
+    },
+    {
+      "id": "scarecrow",
+      "nameKo": "허수아비",
+      "icon": "🎃",
+      "rank": "normal",
+      "level": 1,
+      "element": null,
+      "mapIds": [
+        "training_ground"
+      ],
+      "hp": 50,
+      "attack": 0,
+      "defense": 0,
+      "speed": 0,
+      "exp": 6,
+      "gold": 2
+    },
+    {
+      "id": "squirrel",
+      "nameKo": "다람쥐",
+      "icon": "🐿️",
+      "rank": "normal",
+      "level": 2,
+      "element": "earth",
+      "mapIds": [
+        "forest_entrance"
+      ],
+      "hp": 30,
+      "attack": 5,
+      "defense": 2,
+      "speed": 8,
+      "exp": 12,
+      "gold": 5
+    },
+    {
+      "id": "fox",
+      "nameKo": "여우",
+      "icon": "🦊",
+      "rank": "normal",
+      "level": 3,
+      "element": null,
+      "mapIds": [
+        "forest_entrance"
+      ],
+      "hp": 40,
+      "attack": 8,
+      "defense": 3,
+      "speed": 11,
+      "exp": 19,
+      "gold": 8
+    },
+    {
+      "id": "giant_beetle",
+      "nameKo": "거대 딱정벌레",
+      "icon": "🪲",
+      "rank": "normal",
+      "level": 3,
+      "element": "earth",
+      "mapIds": [
+        "forest_entrance"
+      ],
+      "hp": 50,
+      "attack": 8,
+      "defense": 10,
+      "speed": 3,
+      "exp": 19,
+      "gold": 8
+    },
+    {
+      "id": "green_slime",
+      "nameKo": "초록 슬라임",
+      "icon": "🟢",
+      "rank": "normal",
+      "level": 3,
+      "element": "earth",
+      "mapIds": [
+        "swamp_entrance"
+      ],
+      "hp": 50,
+      "attack": 6,
+      "defense": 3,
+      "speed": 4,
+      "exp": 19,
+      "gold": 8
+    },
+    {
+      "id": "squirrel_elder",
+      "nameKo": "늙은 다람쥐",
+      "icon": "🐿️",
+      "rank": "elite",
+      "level": 3,
+      "element": "earth",
+      "mapIds": [
+        "forest_entrance"
+      ],
+      "hp": 45,
+      "attack": 8,
+      "defense": 4,
+      "speed": 6,
+      "exp": 19,
+      "gold": 8
+    },
+    {
+      "id": "walking_shrub",
+      "nameKo": "걷는 관목",
+      "icon": "🌿",
+      "rank": "normal",
+      "level": 3,
+      "element": "earth",
+      "mapIds": [
+        "forest_clearing"
+      ],
+      "hp": 40,
+      "attack": 7,
+      "defense": 5,
+      "speed": 4,
+      "exp": 19,
+      "gold": 8
+    },
+    {
+      "id": "forest_bandit",
+      "nameKo": "숲속 도적",
+      "icon": "🗡️",
+      "rank": "normal",
+      "level": 4,
+      "element": null,
+      "mapIds": [
+        "bandit_camp"
+      ],
+      "hp": 45,
+      "attack": 12,
+      "defense": 6,
+      "speed": 9,
+      "exp": 27,
+      "gold": 20
+    },
+    {
+      "id": "forest_wasp",
+      "nameKo": "숲말벌",
+      "icon": "🐝",
+      "rank": "normal",
+      "level": 4,
+      "element": null,
+      "mapIds": [
+        "forest_clearing"
+      ],
+      "hp": 35,
+      "attack": 14,
+      "defense": 2,
+      "speed": 15,
+      "exp": 27,
+      "gold": 10
+    },
+    {
+      "id": "wild_boar",
+      "nameKo": "멧돼지",
+      "icon": "🐗",
+      "rank": "normal",
+      "level": 4,
+      "element": "earth",
+      "mapIds": [
+        "forest_clearing"
+      ],
+      "hp": 70,
+      "attack": 12,
+      "defense": 8,
+      "speed": 5,
+      "exp": 27,
+      "gold": 10
+    },
+    {
+      "id": "bandit_archer",
+      "nameKo": "도적 궁수",
+      "icon": "🏹",
+      "rank": "normal",
+      "level": 5,
+      "element": null,
+      "mapIds": [
+        "bandit_camp"
+      ],
+      "hp": 40,
+      "attack": 15,
+      "defense": 4,
+      "speed": 10,
+      "exp": 35,
+      "gold": 24
+    },
+    {
+      "id": "blue_slime",
+      "nameKo": "파란 슬라임",
+      "icon": "🔵",
+      "rank": "normal",
+      "level": 5,
+      "element": "ice",
+      "mapIds": [
+        "shallow_marsh"
+      ],
+      "hp": 65,
+      "attack": 10,
+      "defense": 4,
+      "speed": 5,
+      "exp": 35,
+      "gold": 12
+    },
+    {
+      "id": "giant_ant",
+      "nameKo": "거대 개미",
+      "icon": "🐜",
+      "rank": "normal",
+      "level": 5,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 45,
+      "attack": 10,
+      "defense": 7,
+      "speed": 8,
+      "exp": 35,
+      "gold": 12
+    },
+    {
+      "id": "training_dummy_advanced",
+      "nameKo": "고급 훈련 인형",
+      "icon": "🎯",
+      "rank": "normal",
+      "level": 5,
+      "element": null,
+      "mapIds": [
+        "training_ground"
+      ],
+      "hp": 150,
+      "attack": 5,
+      "defense": 5,
+      "speed": 3,
+      "exp": 35,
+      "gold": 12
+    },
+    {
+      "id": "wind_sprite",
+      "nameKo": "바람의 요정",
+      "icon": "🌬️",
+      "rank": "normal",
+      "level": 5,
+      "element": "lightning",
+      "mapIds": [
+        "forest_clearing"
+      ],
+      "hp": 30,
+      "attack": 12,
+      "defense": 1,
+      "speed": 18,
+      "exp": 35,
+      "gold": 12
+    },
+    {
+      "id": "wolf",
+      "nameKo": "늑대",
+      "icon": "🐺",
+      "rank": "normal",
+      "level": 5,
+      "element": null,
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 80,
+      "attack": 15,
+      "defense": 5,
+      "speed": 10,
+      "exp": 35,
+      "gold": 12
+    },
+    {
+      "id": "bandit_brute",
+      "nameKo": "도적 깡패",
+      "icon": "💪",
+      "rank": "elite",
+      "level": 6,
+      "element": null,
+      "mapIds": [
+        "bandit_camp"
+      ],
+      "hp": 80,
+      "attack": 18,
+      "defense": 10,
+      "speed": 5,
+      "exp": 44,
+      "gold": 30
+    },
+    {
+      "id": "forest_spider",
+      "nameKo": "숲거미",
+      "icon": "🕷️",
+      "rank": "normal",
+      "level": 6,
+      "element": "dark",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 60,
+      "attack": 12,
+      "defense": 3,
+      "speed": 12,
+      "exp": 44,
+      "gold": 15
+    },
+    {
+      "id": "forest_wisp",
+      "nameKo": "숲의 도깨비불",
+      "icon": "✨",
+      "rank": "normal",
+      "level": 6,
+      "element": "holy",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 40,
+      "attack": 14,
+      "defense": 2,
+      "speed": 14,
+      "exp": 44,
+      "gold": 15
+    },
+    {
+      "id": "red_slime",
+      "nameKo": "빨간 슬라임",
+      "icon": "🔴",
+      "rank": "normal",
+      "level": 6,
+      "element": "fire",
+      "mapIds": [
+        "shallow_marsh"
+      ],
+      "hp": 55,
+      "attack": 14,
+      "defense": 3,
+      "speed": 6,
+      "exp": 44,
+      "gold": 15
+    },
+    {
+      "id": "vine_creeper",
+      "nameKo": "덩굴 괴물",
+      "icon": "🌱",
+      "rank": "normal",
+      "level": 6,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 55,
+      "attack": 14,
+      "defense": 4,
+      "speed": 7,
+      "exp": 44,
+      "gold": 15
+    },
+    {
+      "id": "ant_soldier",
+      "nameKo": "병정개미",
+      "icon": "🐜",
+      "rank": "elite",
+      "level": 7,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 75,
+      "attack": 16,
+      "defense": 12,
+      "speed": 7,
+      "exp": 53,
+      "gold": 18
+    },
+    {
+      "id": "dire_wolf",
+      "nameKo": "흉포한 늑대",
+      "icon": "🐺",
+      "rank": "elite",
+      "level": 7,
+      "element": null,
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 120,
+      "attack": 22,
+      "defense": 8,
+      "speed": 12,
+      "exp": 53,
+      "gold": 18
+    },
+    {
+      "id": "highway_robber",
+      "nameKo": "노상강도",
+      "icon": "🥷",
+      "rank": "normal",
+      "level": 7,
+      "element": null,
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 60,
+      "attack": 16,
+      "defense": 7,
+      "speed": 11,
+      "exp": 53,
+      "gold": 36
+    },
+    {
+      "id": "mushroom_man",
+      "nameKo": "버섯인간",
+      "icon": "🍄",
+      "rank": "normal",
+      "level": 7,
+      "element": "dark",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 65,
+      "attack": 12,
+      "defense": 8,
+      "speed": 5,
+      "exp": 53,
+      "gold": 18
+    },
+    {
+      "id": "water_spirit",
+      "nameKo": "물의 정령",
+      "icon": "💧",
+      "rank": "normal",
+      "level": 7,
+      "element": "ice",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 55,
+      "attack": 16,
+      "defense": 4,
+      "speed": 10,
+      "exp": 53,
+      "gold": 18
+    },
+    {
+      "id": "bandit_mage",
+      "nameKo": "도적 마법사",
+      "icon": "🔥",
+      "rank": "elite",
+      "level": 8,
+      "element": "fire",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 55,
+      "attack": 22,
+      "defense": 5,
+      "speed": 8,
+      "exp": 63,
+      "gold": 40
+    },
+    {
+      "id": "forest_bear",
+      "nameKo": "숲 곰",
+      "icon": "🐻",
+      "rank": "elite",
+      "level": 8,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 180,
+      "attack": 25,
+      "defense": 15,
+      "speed": 4,
+      "exp": 63,
+      "gold": 20
+    },
+    {
+      "id": "poison_flower",
+      "nameKo": "독꽃",
+      "icon": "🌺",
+      "rank": "elite",
+      "level": 8,
+      "element": "dark",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 50,
+      "attack": 20,
+      "defense": 3,
+      "speed": 6,
+      "exp": 63,
+      "gold": 20
+    },
+    {
+      "id": "poison_slime",
+      "nameKo": "독 슬라임",
+      "icon": "🟣",
+      "rank": "elite",
+      "level": 8,
+      "element": "dark",
+      "mapIds": [
+        "shallow_marsh"
+      ],
+      "hp": 80,
+      "attack": 12,
+      "defense": 5,
+      "speed": 5,
+      "exp": 63,
+      "gold": 20
+    },
+    {
+      "id": "venomous_spider",
+      "nameKo": "독거미",
+      "icon": "🕷️",
+      "rank": "elite",
+      "level": 8,
+      "element": "dark",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 80,
+      "attack": 18,
+      "defense": 5,
+      "speed": 14,
+      "exp": 63,
+      "gold": 20
+    },
+    {
+      "id": "earth_spirit",
+      "nameKo": "대지의 정령",
+      "icon": "🪨",
+      "rank": "elite",
+      "level": 9,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 100,
+      "attack": 20,
+      "defense": 18,
+      "speed": 4,
+      "exp": 74,
+      "gold": 22
+    },
+    {
+      "id": "shadow_slime",
+      "nameKo": "그림자 슬라임",
+      "icon": "⚫",
+      "rank": "elite",
+      "level": 9,
+      "element": "dark",
+      "mapIds": [
+        "slime_nest"
+      ],
+      "hp": 70,
+      "attack": 18,
+      "defense": 4,
+      "speed": 10,
+      "exp": 74,
+      "gold": 22
+    },
+    {
+      "id": "cave_centipede",
+      "nameKo": "동굴 지네",
+      "icon": "🐛",
+      "rank": "normal",
+      "level": 10,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 90,
+      "attack": 20,
+      "defense": 6,
+      "speed": 11,
+      "exp": 85,
+      "gold": 25
+    },
+    {
+      "id": "golden_slime",
+      "nameKo": "황금 슬라임",
+      "icon": "🟡",
+      "rank": "elite",
+      "level": 10,
+      "element": "holy",
+      "mapIds": [
+        "shallow_marsh"
+      ],
+      "hp": 40,
+      "attack": 5,
+      "defense": 8,
+      "speed": 15,
+      "exp": 100,
+      "gold": 200
+    },
+    {
+      "id": "skeleton_warrior",
+      "nameKo": "해골 전사",
+      "icon": "💀",
+      "rank": "normal",
+      "level": 10,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 70,
+      "attack": 18,
+      "defense": 8,
+      "speed": 7,
+      "exp": 85,
+      "gold": 25
+    },
+    {
+      "id": "young_treant",
+      "nameKo": "어린 트렌트",
+      "icon": "🌲",
+      "rank": "elite",
+      "level": 10,
+      "element": "earth",
+      "mapIds": [
+        "deep_forest"
+      ],
+      "hp": 150,
+      "attack": 22,
+      "defense": 18,
+      "speed": 3,
+      "exp": 85,
+      "gold": 25
+    },
+    {
+      "id": "ghoul",
+      "nameKo": "구울",
+      "icon": "🧟",
+      "rank": "normal",
+      "level": 11,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 90,
+      "attack": 20,
+      "defense": 6,
+      "speed": 6,
+      "exp": 97,
+      "gold": 28
+    },
+    {
+      "id": "skeleton_archer",
+      "nameKo": "해골 궁수",
+      "icon": "🏹",
+      "rank": "normal",
+      "level": 11,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 55,
+      "attack": 22,
+      "defense": 5,
+      "speed": 9,
+      "exp": 97,
+      "gold": 28
+    },
+    {
+      "id": "ancient_spirit",
+      "nameKo": "고대 정령",
+      "icon": "👻",
+      "rank": "elite",
+      "level": 12,
+      "element": "holy",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 85,
+      "attack": 25,
+      "defense": 8,
+      "speed": 12,
+      "exp": 109,
+      "gold": 30
+    },
+    {
+      "id": "stone_golem",
+      "nameKo": "석재 골렘",
+      "icon": "🗿",
+      "rank": "normal",
+      "level": 12,
+      "element": "earth",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 200,
+      "attack": 25,
+      "defense": 25,
+      "speed": 2,
+      "exp": 109,
+      "gold": 30
+    },
+    {
+      "id": "animated_armor",
+      "nameKo": "움직이는 갑옷",
+      "icon": "🛡️",
+      "rank": "normal",
+      "level": 13,
+      "element": null,
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 120,
+      "attack": 22,
+      "defense": 20,
+      "speed": 5,
+      "exp": 122,
+      "gold": 32
+    },
+    {
+      "id": "skeleton_mage",
+      "nameKo": "해골 마법사",
+      "icon": "🧙",
+      "rank": "elite",
+      "level": 13,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 65,
+      "attack": 28,
+      "defense": 4,
+      "speed": 8,
+      "exp": 122,
+      "gold": 32
+    },
+    {
+      "id": "wraith",
+      "nameKo": "망령",
+      "icon": "👤",
+      "rank": "elite",
+      "level": 14,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 75,
+      "attack": 30,
+      "defense": 3,
+      "speed": 13,
+      "exp": 136,
+      "gold": 35
+    },
+    {
+      "id": "cursed_scholar",
+      "nameKo": "저주받은 학자",
+      "icon": "📚",
+      "rank": "elite",
+      "level": 15,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 80,
+      "attack": 32,
+      "defense": 6,
+      "speed": 9,
+      "exp": 150,
+      "gold": 38
+    },
+    {
+      "id": "iron_golem",
+      "nameKo": "철재 골렘",
+      "icon": "🤖",
+      "rank": "elite",
+      "level": 15,
+      "element": "earth",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 300,
+      "attack": 35,
+      "defense": 35,
+      "speed": 3,
+      "exp": 150,
+      "gold": 38
+    }
+  ]
+}
