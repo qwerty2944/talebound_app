@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/network/api_exception.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/game_widgets.dart';
 import '../../../../core/widgets/stat_bar.dart';
 import '../../../game/domain/entities/character.dart';
 import '../../../game/presentation/controllers/profile_controller.dart';
@@ -208,25 +209,38 @@ class _MonsterPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tint = rankColor(monster.rank);
+    final isBoss = monster.rank.toLowerCase() == 'boss';
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [AppColors.surfaceAlt, AppColors.background],
         ),
+        border: Border(bottom: BorderSide(color: tint.withValues(alpha: 0.6))),
       ),
       child: Column(
         children: [
-          SizedBox(
-            height: 84,
+          Container(
+            width: 96,
+            height: 96,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [tint.withValues(alpha: 0.22), Colors.transparent],
+              ),
+              border: Border.all(color: tint.withValues(alpha: 0.5)),
+            ),
             child: Stack(
               alignment: Alignment.center,
               clipBehavior: Clip.none,
               children: [
-                Text(monster.icon, style: const TextStyle(fontSize: 60)),
+                Text(monster.icon,
+                    style: TextStyle(fontSize: isBoss ? 64 : 54)),
                 if (hitSeq > 0 && lastDamage > 0)
                   _FloatingDamage(
                     key: ValueKey(hitSeq),
@@ -236,14 +250,25 @@ class _MonsterPanel extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          Text('${monster.nameKo}  Lv.${monster.level}',
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary)),
           const SizedBox(height: 10),
-          StatBar(label: 'HP', value: hp, max: maxHp, color: AppColors.hp),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GameBadge(
+                  label: 'Lv.${monster.level}',
+                  color: tint,
+                  filled: isBoss),
+              const SizedBox(width: 8),
+              Text(monster.nameKo,
+                  style: TextStyle(
+                      fontSize: isBoss ? 18 : 16,
+                      fontWeight: FontWeight.bold,
+                      color: isBoss ? tint : AppColors.textPrimary,
+                      letterSpacing: 0.3)),
+            ],
+          ),
+          const SizedBox(height: 12),
+          StatBar(label: 'HP', value: hp, max: maxHp, color: tint),
         ],
       ),
     );
@@ -309,10 +334,14 @@ class _BattleLog extends StatelessWidget {
         itemCount: log.length,
         itemBuilder: (_, i) {
           final line = log[log.length - 1 - i];
+          final newest = i == 0;
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3),
             child: Text(line,
-                style: const TextStyle(fontSize: 13, color: AppColors.textMuted)),
+                style: TextStyle(
+                    fontSize: 13,
+                    color: battleLogColor(line),
+                    fontWeight: newest ? FontWeight.w600 : FontWeight.normal)),
           );
         },
       ),
@@ -429,18 +458,33 @@ class _ResultBanner extends StatelessWidget {
       'defeat' => '💀 패배',
       _ => '🏃 도주',
     };
-    return Container(
-      width: double.infinity,
-      color: AppColors.surfaceAlt,
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(title,
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: isVictory ? AppColors.accent : AppColors.textMuted)),
+    final accentColor = isVictory ? AppColors.accent : AppColors.textMuted;
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0.85, end: 1),
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.elasticOut,
+      builder: (context, scale, child) =>
+          Transform.scale(scale: scale, child: child),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [AppColors.surfaceAlt, AppColors.surface],
+          ),
+          border: Border(top: BorderSide(color: accentColor, width: 2)),
+        ),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(title,
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    color: accentColor)),
           if (isVictory) ...[
             const SizedBox(height: 8),
             Text('EXP +${reward.exp}   🪙 +${reward.gold}',
@@ -462,16 +506,18 @@ class _ResultBanner extends StatelessWidget {
                         fontSize: 12, color: AppColors.textMuted)),
               ),
           ],
-          const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              onPressed: onClose,
-              style: FilledButton.styleFrom(backgroundColor: AppColors.primary),
-              child: const Text('돌아가기'),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: onClose,
+                style:
+                    FilledButton.styleFrom(backgroundColor: AppColors.primary),
+                child: const Text('돌아가기'),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -23,10 +23,15 @@ class RoundResult {
 /// 클라이언트 권위 텍스트 전투(웹과 동일 구조 — 서버는 최종 HP/결과만 정산).
 /// 데미지 공식은 MVP용 단순화 버전.
 class BattleEngine {
-  BattleEngine({required Character player, required this.monster})
-      : playerMaxHp = player.maxHp,
-        playerHp = player.currentHp <= 0 ? player.maxHp : player.currentHp,
-        playerMp = player.currentMp,
+  BattleEngine({
+    required Character player,
+    required this.monster,
+    int? startHp,
+    int? startMp,
+  })  : playerMaxHp = player.maxHp,
+        playerHp =
+            startHp ?? (player.currentHp <= 0 ? player.maxHp : player.currentHp),
+        playerMp = startMp ?? player.currentMp,
         monsterMaxHp = monster.hp,
         monsterHp = monster.hp,
         _playerAtk = 6 + (player.stats.str * 1.2).round(),

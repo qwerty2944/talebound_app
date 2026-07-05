@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/game_maps.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/game_widgets.dart';
 import '../../../../core/widgets/stat_bar.dart';
 import '../../../auth/domain/entities/auth_session.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../battle/presentation/screens/monster_list_screen.dart';
+import '../../../dungeon/presentation/screens/dungeon_list_screen.dart';
+import '../../../quest/presentation/screens/quest_list_screen.dart';
 import '../../domain/entities/character.dart';
 import '../controllers/profile_controller.dart';
 
@@ -89,21 +92,41 @@ class _HomeBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    Future<void> go(Widget screen) async {
+      await Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => screen));
+      await ref.read(profileControllerProvider.notifier).refresh();
+    }
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         _CharacterCard(character: character),
-        const SizedBox(height: 20),
+        const SizedBox(height: 22),
+        const SectionLabel('모험', icon: Icons.explore),
+        const SizedBox(height: 12),
         _ActionButton(
           icon: Icons.local_fire_department,
-          label: '전투 — 몬스터 사냥',
-          onTap: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const MonsterListScreen()),
-            );
-            // 전투 후 프로필 최신화
-            await ref.read(profileControllerProvider.notifier).refresh();
-          },
+          title: '전투',
+          subtitle: '야생 몬스터를 사냥한다',
+          color: AppColors.hp,
+          onTap: () => go(const MonsterListScreen()),
+        ),
+        const SizedBox(height: 12),
+        _ActionButton(
+          icon: Icons.assignment_turned_in,
+          title: '퀘스트',
+          subtitle: '의뢰를 수행하고 보상을 받는다',
+          color: AppColors.accent,
+          onTap: () => go(const QuestListScreen()),
+        ),
+        const SizedBox(height: 12),
+        _ActionButton(
+          icon: Icons.castle,
+          title: '던전',
+          subtitle: '웨이브를 돌파해 보스를 처치한다',
+          color: AppColors.primary,
+          onTap: () => go(const DungeonListScreen()),
         ),
       ],
     );
@@ -117,150 +140,123 @@ class _CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 52,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: const LinearGradient(
-                      colors: [AppColors.primary, AppColors.accent],
-                    ),
-                    border: Border.all(color: AppColors.border),
+    return GamePanel(
+      tint: AppColors.primary,
+      glow: true,
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 58,
+                height: 58,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [AppColors.primary, AppColors.accent],
                   ),
-                  child: const Icon(Icons.person, color: Colors.white),
+                  border: Border.all(color: AppColors.accentBright, width: 2),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.5),
+                      blurRadius: 12,
+                      spreadRadius: -2,
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        character.name,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
-                        ),
+                child: const Icon(Icons.person, color: Colors.white, size: 30),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      character.name,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        letterSpacing: 0.3,
                       ),
-                      Row(
-                        children: [
-                          _Chip(text: 'Lv.${character.level}', color: AppColors.primary),
-                          const SizedBox(width: 6),
-                          Icon(Icons.place, size: 13, color: AppColors.textMuted),
-                          const SizedBox(width: 2),
-                          Text(mapNameKo(character.mapId),
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        GameBadge(
+                          label: 'Lv.${character.level}',
+                          color: AppColors.accent,
+                          icon: Icons.shield_moon,
+                        ),
+                        const SizedBox(width: 6),
+                        const Icon(Icons.place,
+                            size: 13, color: AppColors.textMuted),
+                        const SizedBox(width: 2),
+                        Flexible(
+                          child: Text(mapNameKo(character.mapId),
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                   fontSize: 12, color: AppColors.textMuted)),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 18),
-            StatBar(
-              label: 'HP',
-              icon: Icons.favorite,
-              value: character.currentHp,
-              max: character.maxHp,
-              color: AppColors.hp,
-            ),
-            const SizedBox(height: 10),
-            StatBar(
-              label: 'MP',
-              icon: Icons.auto_awesome,
-              value: character.currentMp,
-              max: character.maxMp,
-              color: AppColors.mp,
-            ),
-            const SizedBox(height: 10),
-            StatBar(
-              label: '피로도',
-              icon: Icons.bolt,
-              value: character.fatigue,
-              max: character.maxFatigue,
-              color: AppColors.fatigue,
-            ),
-            const SizedBox(height: 10),
-            StatBar(
-              label: 'EXP',
-              icon: Icons.star,
-              value: character.experience,
-              max: character.expToNextLevel,
-              color: AppColors.exp,
-            ),
-            const SizedBox(height: 18),
-            Row(
-              children: [
-                _Resource(icon: '🪙', label: '골드', value: '${character.gold}'),
-                const SizedBox(width: 20),
-                _Resource(icon: '💎', label: '젬', value: '${character.gems}'),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          StatBar(
+            label: 'HP',
+            icon: Icons.favorite,
+            value: character.currentHp,
+            max: character.maxHp,
+            color: AppColors.hp,
+          ),
+          const SizedBox(height: 10),
+          StatBar(
+            label: 'MP',
+            icon: Icons.auto_awesome,
+            value: character.currentMp,
+            max: character.maxMp,
+            color: AppColors.mp,
+          ),
+          const SizedBox(height: 10),
+          StatBar(
+            label: '피로도',
+            icon: Icons.bolt,
+            value: character.fatigue,
+            max: character.maxFatigue,
+            color: AppColors.fatigue,
+          ),
+          const SizedBox(height: 10),
+          StatBar(
+            label: 'EXP',
+            icon: Icons.star,
+            value: character.experience,
+            max: character.expToNextLevel,
+            color: AppColors.exp,
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              ResourcePill(
+                  icon: '🪙',
+                  value: '${character.gold}',
+                  color: AppColors.accent),
+              const SizedBox(width: 10),
+              ResourcePill(
+                  icon: '💎',
+                  value: '${character.gems}',
+                  color: AppColors.rarityRare),
+            ],
+          ),
+        ],
       ),
-    );
-  }
-}
-
-class _Chip extends StatelessWidget {
-  const _Chip({required this.text, required this.color});
-
-  final String text;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.18),
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: color.withValues(alpha: 0.5)),
-      ),
-      child: Text(text,
-          style: TextStyle(
-              fontSize: 12, fontWeight: FontWeight.bold, color: color)),
-    );
-  }
-}
-
-class _Resource extends StatelessWidget {
-  const _Resource({required this.icon, required this.label, required this.value});
-
-  final String icon;
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(icon, style: const TextStyle(fontSize: 18)),
-        const SizedBox(width: 6),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label,
-                style: const TextStyle(fontSize: 11, color: AppColors.textMuted)),
-            Text(value,
-                style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.accent)),
-          ],
-        ),
-      ],
     );
   }
 }
@@ -268,42 +264,55 @@ class _Resource extends StatelessWidget {
 class _ActionButton extends StatelessWidget {
   const _ActionButton({
     required this.icon,
-    required this.label,
+    required this.title,
+    required this.subtitle,
+    required this.color,
     required this.onTap,
   });
 
   final IconData icon;
-  final String label;
+  final String title;
+  final String subtitle;
+  final Color color;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.surface,
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.border),
+    return GamePanel(
+      onTap: onTap,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: Row(
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.16),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: color.withValues(alpha: 0.5)),
+            ),
+            child: Icon(icon, color: color, size: 24),
           ),
-          child: Row(
-            children: [
-              Icon(icon, color: AppColors.accent),
-              const SizedBox(width: 12),
-              Text(label,
-                  style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary)),
-              const Spacer(),
-              const Icon(Icons.chevron_right, color: AppColors.textMuted),
-            ],
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.textPrimary,
+                        letterSpacing: 0.3)),
+                const SizedBox(height: 2),
+                Text(subtitle,
+                    style: const TextStyle(
+                        fontSize: 12, color: AppColors.textMuted)),
+              ],
+            ),
           ),
-        ),
+          const Icon(Icons.chevron_right, color: AppColors.textFaint),
+        ],
       ),
     );
   }
