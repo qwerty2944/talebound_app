@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/storage/token_storage.dart';
+import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/controllers/auth_controller.dart';
-import 'features/auth/presentation/screens/home_screen.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
+import 'features/game/presentation/screens/game_home_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,14 +26,9 @@ class MudApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MUD',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
+      title: '테일바운드',
+      debugShowCheckedModeBanner: false,
+      theme: buildAppTheme(),
       home: const AuthGate(),
     );
   }
@@ -46,7 +42,7 @@ class AuthGate extends ConsumerWidget {
     final auth = ref.watch(authControllerProvider);
 
     final session = auth.value;
-    if (session != null) return HomeScreen(session: session);
+    if (session != null) return GameHomeScreen(session: session);
 
     // 세션 복원 중에만 스플래시. 로그인 요청 중 로딩은 LoginScreen이 처리한다.
     if (auth.isLoading && !auth.hasValue && auth.error == null) {
