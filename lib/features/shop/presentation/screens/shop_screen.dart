@@ -5,6 +5,7 @@ import '../../../../core/network/api_exception.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/game_widgets.dart';
 import '../../../game/presentation/controllers/profile_controller.dart';
+import '../../../inventory/presentation/controllers/inventory_controller.dart';
 import '../../domain/entities/item_rarity.dart';
 import '../../domain/entities/merchant.dart';
 import '../../domain/entities/shop_item.dart';
@@ -260,6 +261,8 @@ class _BuyTab extends ConsumerWidget {
             quantity: qty,
           );
       onBought(res.gold);
+      // 구매분이 판매 탭에도 반영되도록 인벤 갱신.
+      await ref.read(inventoryControllerProvider.notifier).refresh();
       // 백엔드가 인벤 여유 부족 시 일부만 지급할 수 있음(delivered < qty).
       final partial = res.quantity < qty;
       showGameSnack(
