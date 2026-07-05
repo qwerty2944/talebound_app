@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/storage/token_storage.dart';
 import 'core/theme/app_theme.dart';
+import 'core/widgets/game_logo.dart';
 import 'features/auth/presentation/controllers/auth_controller.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
 import 'features/game/presentation/screens/game_home_screen.dart';
@@ -51,7 +52,7 @@ class AuthGate extends ConsumerWidget {
 
     // 세션 복원 중에만 스플래시. 로그인 요청 중 로딩은 LoginScreen이 처리한다.
     if (auth.isLoading && !auth.hasValue && auth.error == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const SplashScreen();
     }
 
     return const LoginScreen();
