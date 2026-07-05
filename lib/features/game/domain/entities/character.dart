@@ -1,3 +1,5 @@
+import '../../../inventory/domain/entities/equipment.dart';
+
 /// 게임 홈에 표시할 캐릭터 요약. current_hp/mp가 null이면 최대치로 간주한다.
 class Character {
   const Character({
@@ -14,6 +16,7 @@ class Character {
     required this.maxFatigue,
     required this.mapId,
     required this.stats,
+    this.equipment = Equipment.empty,
   });
 
   final String name;
@@ -29,6 +32,7 @@ class Character {
   final int maxFatigue;
   final String mapId;
   final CharacterStats stats;
+  final Equipment equipment;
 
   /// 다음 레벨까지 필요 경험치 (백엔드 applyLevelUps: level × 100).
   int get expToNextLevel => level * 100;

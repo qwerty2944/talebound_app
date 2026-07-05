@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../inventory/data/mappers/equipment_mapper.dart';
 import '../../domain/entities/character.dart';
 
 part 'profile_dto.freezed.dart';
@@ -29,6 +30,7 @@ abstract class ProfileDto with _$ProfileDto {
     @Default(0) int fatigue,
     @JsonKey(name: 'max_fatigue') @Default(100) int maxFatigue,
     @JsonKey(name: 'current_map_id') String? currentMapId,
+    Map<String, dynamic>? equipment,
     CharacterInfoDto? character,
   }) = _ProfileDto;
 
@@ -62,6 +64,7 @@ abstract class ProfileDto with _$ProfileDto {
         cha: stats.cha,
         lck: stats.lck,
       ),
+      equipment: EquipmentMapper.fromJson(equipment),
     );
   }
 }

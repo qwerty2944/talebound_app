@@ -34,8 +34,12 @@ class BattleEngine {
         playerMp = startMp ?? player.currentMp,
         monsterMaxHp = monster.hp,
         monsterHp = monster.hp,
-        _playerAtk = 6 + (player.stats.str * 1.2).round(),
-        _playerDef = (player.stats.con / 2 + player.stats.dex / 4).round();
+        // 착용 장비 스탯 보너스 합산(물리/마법 공격 → 공격, 물리/마법 방어 → 방어).
+        _playerAtk = 6 +
+            (player.stats.str * 1.2).round() +
+            player.equipment.attackBonus,
+        _playerDef = (player.stats.con / 2 + player.stats.dex / 4).round() +
+            player.equipment.defenseBonus;
 
   final Monster monster;
   final int playerMaxHp;
