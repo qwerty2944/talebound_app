@@ -1,4 +1,4 @@
-/// 전투 대상 몬스터 (번들 asset 기반). 보스는 이번 MVP 범위 밖이라 제외한다.
+/// 전투 대상 몬스터 (번들 asset 기반). rank == 'boss'는 보스전(유니티 연출) 대상.
 class Monster {
   const Monster({
     required this.id,
