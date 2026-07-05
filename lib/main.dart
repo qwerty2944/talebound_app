@@ -29,6 +29,11 @@ class MudApp extends StatelessWidget {
       title: '테일바운드',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
+      // 모든 화면 뒤에 다크 판타지 그라데이션 배경을 깐다(Scaffold는 투명).
+      builder: (context, child) => DecoratedBox(
+        decoration: appBackground,
+        child: child,
+      ),
       home: const AuthGate(),
     );
   }

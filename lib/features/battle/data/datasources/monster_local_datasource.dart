@@ -17,6 +17,12 @@ class MonsterLocalDataSource {
     final json = jsonDecode(raw) as Map<String, dynamic>;
     return MonsterListDto.fromJson(json).monsters;
   }
+
+  /// id → MonsterDto 조회용 맵 (던전 웨이브 몬스터 스탯 해석에 사용).
+  Future<Map<String, MonsterDto>> loadMonsterMap() async {
+    final list = await loadMonsters();
+    return {for (final m in list) m.id: m};
+  }
 }
 
 @Riverpod(keepAlive: true)

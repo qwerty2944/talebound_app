@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/game_maps.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/widgets/game_widgets.dart';
 import '../../domain/entities/monster.dart';
 import '../controllers/monster_list_controller.dart';
 import 'battle_screen.dart';
@@ -43,64 +44,65 @@ class _MonsterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final map = monster.mapIds.isEmpty ? '-' : mapNameKo(monster.mapIds.first);
-    return Material(
-      color: AppColors.surface,
-      borderRadius: BorderRadius.circular(14),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(builder: (_) => BattleScreen(monster: monster)),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.border),
+    final tint = rankColor(monster.rank);
+    return GamePanel(
+      tint: tint,
+      padding: const EdgeInsets.all(12),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => BattleScreen(monster: monster)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: tint.withValues(alpha: 0.12),
+              border: Border.all(color: tint.withValues(alpha: 0.5)),
+            ),
+            child: Text(monster.icon, style: const TextStyle(fontSize: 26)),
           ),
-          child: Row(
-            children: [
-              Text(monster.icon, style: const TextStyle(fontSize: 30)),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Text(monster.nameKo,
-                            style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.textPrimary)),
-                        const SizedBox(width: 6),
-                        Text('Lv.${monster.level}',
-                            style: const TextStyle(
-                                fontSize: 12, color: AppColors.primary)),
-                      ],
+                    Flexible(
+                      child: Text(monster.nameKo,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.textPrimary)),
                     ),
-                    const SizedBox(height: 2),
-                    Text('$map · HP ${monster.hp} · 공격 ${monster.attack}',
-                        style: const TextStyle(
-                            fontSize: 12, color: AppColors.textMuted)),
+                    const SizedBox(width: 8),
+                    GameBadge(label: 'Lv.${monster.level}', color: tint),
                   ],
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text('EXP ${monster.exp}',
-                      style: const TextStyle(
-                          fontSize: 12, color: AppColors.exp)),
-                  Text('🪙 ${monster.gold}',
-                      style: const TextStyle(
-                          fontSize: 12, color: AppColors.accent)),
-                ],
-              ),
-              const SizedBox(width: 4),
-              const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                const SizedBox(height: 4),
+                Text('$map · HP ${monster.hp} · 공격 ${monster.attack}',
+                    style: const TextStyle(
+                        fontSize: 12, color: AppColors.textMuted)),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('EXP ${monster.exp}',
+                  style: const TextStyle(fontSize: 12, color: AppColors.exp)),
+              Text('🪙 ${monster.gold}',
+                  style:
+                      const TextStyle(fontSize: 12, color: AppColors.accent)),
             ],
           ),
-        ),
+          const Icon(Icons.chevron_right, color: AppColors.textFaint),
+        ],
       ),
     );
   }

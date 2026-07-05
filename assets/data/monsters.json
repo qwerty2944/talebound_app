@@ -798,6 +798,23 @@
       "speed": 3,
       "exp": 150,
       "gold": 38
+    },
+    {
+      "id": "ancient_lich",
+      "nameKo": "고대 리치",
+      "icon": "☠️",
+      "rank": "boss",
+      "level": 20,
+      "element": "dark",
+      "mapIds": [
+        "ancient_ruins"
+      ],
+      "hp": 600,
+      "attack": 45,
+      "defense": 15,
+      "speed": 10,
+      "exp": 800,
+      "gold": 500
     }
   ]
 }
