@@ -12,6 +12,7 @@ import '../../domain/entities/monster.dart';
 import '../../domain/usecases/complete_battle.dart';
 import '../../domain/usecases/start_battle.dart';
 import '../logic/battle_engine.dart';
+import '../widgets/unity_boss_stage.dart';
 
 enum _Phase { starting, fighting, completing, finished, error }
 
@@ -38,6 +39,9 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
   int _hitSeq = 0;
   int _lastMonsterDamage = 0;
   bool _lastCrit = false;
+
+  final UnityStageController _stage = UnityStageController();
+  bool get _isBoss => widget.monster.rank.toLowerCase() == 'boss';
 
   @override
   void initState() {
@@ -90,7 +94,32 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
       _lastMonsterDamage = round.playerDamageDealt;
       _lastCrit = round.playerCrit;
     });
+    _playRoundAnimation(round, engine.outcome);
     if (engine.isOver) _finish();
+  }
+
+  /// 전투 이벤트 → 유니티 스테이지 애니메이션 (보스전 한정, 준비 안됐으면 no-op).
+  /// 웹 useBattleUnityAnimation과 동일한 타이밍(공격/피격 후 ~700ms IDLE 복귀).
+  void _playRoundAnimation(RoundResult round, BattleOutcome outcome) {
+    if (!_isBoss) return;
+    if (outcome == BattleOutcome.victory) {
+      _stage.play('VICTORY');
+      return;
+    }
+    if (outcome == BattleOutcome.defeat) {
+      _stage.play('HIT');
+      Future.delayed(const Duration(milliseconds: 400), () {
+        if (mounted) _stage.play('DEATH');
+      });
+      return;
+    }
+    // 진행 중: 내 공격 → (반격 있으면) 피격
+    _stage.play('ATTACK');
+    if (round.monsterDamageDealt > 0) {
+      Future.delayed(const Duration(milliseconds: 750), () {
+        if (mounted) _stage.play('HIT');
+      });
+    }
   }
 
   void _onFlee() {
@@ -154,6 +183,8 @@ class _BattleScreenState extends ConsumerState<BattleScreen> {
     final engine = _engine!;
     return Column(
       children: [
+        if (_isBoss)
+          UnityBossStage(controller: _stage, monster: widget.monster),
         _MonsterPanel(
           monster: widget.monster,
           hp: engine.monsterHp,

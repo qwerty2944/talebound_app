@@ -45,6 +45,7 @@ class _MonsterTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final map = monster.mapIds.isEmpty ? '-' : mapNameKo(monster.mapIds.first);
     final tint = rankColor(monster.rank);
+    final isBoss = monster.rank.toLowerCase() == 'boss';
     return GamePanel(
       tint: tint,
       padding: const EdgeInsets.all(12),
@@ -71,16 +72,23 @@ class _MonsterTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
+                    if (isBoss) ...[
+                      const Text('👑', style: TextStyle(fontSize: 15)),
+                      const SizedBox(width: 4),
+                    ],
                     Flexible(
                       child: Text(monster.nameKo,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.textPrimary)),
+                              color: isBoss ? tint : AppColors.textPrimary)),
                     ),
                     const SizedBox(width: 8),
-                    GameBadge(label: 'Lv.${monster.level}', color: tint),
+                    GameBadge(
+                        label: 'Lv.${monster.level}',
+                        color: tint,
+                        filled: isBoss),
                   ],
                 ),
                 const SizedBox(height: 4),
