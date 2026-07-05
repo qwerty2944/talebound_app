@@ -10,6 +10,8 @@ import '../../../auth/presentation/controllers/auth_controller.dart';
 import '../../../battle/presentation/screens/monster_list_screen.dart';
 import '../../../dungeon/presentation/screens/dungeon_list_screen.dart';
 import '../../../quest/presentation/screens/quest_list_screen.dart';
+import '../../../shop/presentation/screens/shop_screen.dart';
+import '../../../training/presentation/screens/training_screen.dart';
 import '../../domain/entities/character.dart';
 import '../controllers/profile_controller.dart';
 
@@ -127,6 +129,24 @@ class _HomeBody extends ConsumerWidget {
           subtitle: '웨이브를 돌파해 보스를 처치한다',
           color: AppColors.primary,
           onTap: () => go(const DungeonListScreen()),
+        ),
+        const SizedBox(height: 22),
+        const SectionLabel('마을', icon: Icons.home_work),
+        const SizedBox(height: 12),
+        _ActionButton(
+          icon: Icons.storefront,
+          title: '상점',
+          subtitle: '아이템을 사고 판다',
+          color: AppColors.accent,
+          onTap: () => go(const ShopScreen()),
+        ),
+        const SizedBox(height: 12),
+        _ActionButton(
+          icon: Icons.fitness_center,
+          title: '수련',
+          subtitle: '무기·마법 숙련도를 단련한다',
+          color: AppColors.mp,
+          onTap: () => go(const TrainingScreen()),
         ),
       ],
     );
