@@ -5,16 +5,20 @@ import '../../../../core/network/api_exception.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/widgets/game_widgets.dart';
 import '../../../game/presentation/controllers/profile_controller.dart';
+import '../../data/datasources/quest_npc_local_datasource.dart';
 import '../../domain/entities/quest.dart';
+import '../../domain/entities/quest_npc.dart';
 import '../controllers/quest_list_controller.dart';
 
-/// 퀘스트 목록 — 상태별 구분(수락 가능/진행 중/완료/수령 완료) + 진행도 + 수락/수령.
+/// 퀘스트 — NPC 대화형(웹 QuestDialog 패턴). NPC별로 인사말 말풍선 + 퀘스트 묶음.
+/// 이미 보상 수령(claimed)한 퀘스트는 웹과 동일하게 숨긴다.
 class QuestListScreen extends ConsumerWidget {
   const QuestListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quests = ref.watch(questListControllerProvider);
+    final npcs = ref.watch(questNpcsProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('퀘스트')),
@@ -26,21 +30,22 @@ class QuestListScreen extends ConsumerWidget {
               ref.read(questListControllerProvider.notifier).refresh(),
         ),
         data: (list) {
-          if (list.isEmpty) {
+          final npcList = npcs.asData?.value ?? const <QuestNpc>[];
+          final groups = _group(list, npcList);
+          if (groups.isEmpty) {
             return const Center(
               child: Text('등록된 퀘스트가 없습니다.',
                   style: TextStyle(color: AppColors.textMuted)),
             );
           }
-          final sorted = _sorted(list);
           return RefreshIndicator(
             onRefresh: () =>
                 ref.read(questListControllerProvider.notifier).refresh(),
             child: ListView.separated(
               padding: const EdgeInsets.all(16),
-              itemCount: sorted.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 10),
-              itemBuilder: (_, i) => _QuestTile(quest: sorted[i]),
+              itemCount: groups.length,
+              separatorBuilder: (_, _) => const SizedBox(height: 20),
+              itemBuilder: (_, i) => _NpcGroupView(group: groups[i]),
             ),
           );
         },
@@ -48,7 +53,44 @@ class QuestListScreen extends ConsumerWidget {
     );
   }
 
-  /// 완료(수령 대기) → 진행 중 → 수락 가능 → 수령 완료 순으로 정렬.
+  /// 퀘스트를 NPC별로 묶는다. claimed는 제외. NPC 정의 순서를 우선한다.
+  List<_NpcGroup> _group(List<Quest> quests, List<QuestNpc> npcs) {
+    final visible =
+        quests.where((q) => q.status != QuestStatus.claimed).toList();
+    final byNpc = <String, List<Quest>>{};
+    for (final q in visible) {
+      byNpc.putIfAbsent(q.npcId, () => []).add(q);
+    }
+
+    final groups = <_NpcGroup>[];
+    final seen = <String>{};
+
+    // 알려진 NPC(에셋 순서) 먼저.
+    for (final n in npcs) {
+      final qs = byNpc[n.id];
+      if (qs == null || qs.isEmpty) continue;
+      groups.add(_NpcGroup(npc: n, quests: _sorted(qs)));
+      seen.add(n.id);
+    }
+    // 에셋에 없는 npcId의 퀘스트는 폴백 그룹으로.
+    for (final entry in byNpc.entries) {
+      if (seen.contains(entry.key)) continue;
+      groups.add(_NpcGroup(
+        npc: QuestNpc(
+          id: entry.key,
+          nameKo: '의뢰인',
+          icon: '📜',
+          mapId: '',
+          description: '',
+          dialogues: const QuestNpcDialogues(),
+        ),
+        quests: _sorted(entry.value),
+      ));
+    }
+    return groups;
+  }
+
+  /// 완료(수령 대기) → 진행 중 → 수락 가능 순.
   List<Quest> _sorted(List<Quest> list) {
     int rank(QuestStatus s) => switch (s) {
           QuestStatus.completed => 0,
@@ -62,6 +104,75 @@ class QuestListScreen extends ConsumerWidget {
         return r != 0 ? r : a.minLevel.compareTo(b.minLevel);
       });
     return copy;
+  }
+}
+
+class _NpcGroup {
+  const _NpcGroup({required this.npc, required this.quests});
+
+  final QuestNpc npc;
+  final List<Quest> quests;
+
+  bool get hasClaimable =>
+      quests.any((q) => q.status == QuestStatus.completed);
+  bool get hasActionable => quests.isNotEmpty;
+}
+
+/// NPC 인사말 말풍선 + 해당 NPC의 퀘스트 카드들.
+class _NpcGroupView extends StatelessWidget {
+  const _NpcGroupView({required this.group});
+
+  final _NpcGroup group;
+
+  @override
+  Widget build(BuildContext context) {
+    final npc = group.npc;
+    final line = group.hasClaimable
+        ? npc.dialogues.questComplete
+        : group.hasActionable
+            ? npc.dialogues.questAvailable
+            : npc.dialogues.noQuest;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GamePanel(
+          tint: group.hasClaimable ? AppColors.accent : AppColors.primary,
+          glow: group.hasClaimable,
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(npc.icon, style: const TextStyle(fontSize: 30)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(npc.nameKo,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimary)),
+                    const SizedBox(height: 4),
+                    Text('“$line”',
+                        style: const TextStyle(
+                            fontSize: 13,
+                            fontStyle: FontStyle.italic,
+                            color: AppColors.textMuted)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        ...group.quests.map((q) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _QuestTile(quest: q),
+            )),
+      ],
+    );
   }
 }
 
@@ -233,9 +344,9 @@ class _QuestTileState extends ConsumerState<_QuestTile> {
     }
     switch (quest.status) {
       case QuestStatus.available:
-        return _fullButton('수락하기', AppColors.primary, _accept);
+        return _fullButton('📜 수락하기', AppColors.primary, _accept);
       case QuestStatus.completed:
-        return _fullButton('보상 수령', AppColors.accent, _claim);
+        return _fullButton('🎁 보상 수령', AppColors.accent, _claim);
       case QuestStatus.accepted:
         return _fullButton('진행 중', AppColors.surfaceAlt, null);
       case QuestStatus.claimed:

@@ -1,4 +1,5 @@
 import '../../../inventory/domain/entities/equipment.dart';
+import 'injury.dart';
 
 /// 게임 홈에 표시할 캐릭터 요약. current_hp/mp가 null이면 최대치로 간주한다.
 class Character {
@@ -17,6 +18,7 @@ class Character {
     required this.mapId,
     required this.stats,
     this.equipment = Equipment.empty,
+    this.injuries = const <Injury>[],
   });
 
   final String name;
@@ -33,6 +35,9 @@ class Character {
   final String mapId;
   final CharacterStats stats;
   final Equipment equipment;
+
+  /// 현재 부상 목록(서버 characters.injuries 순서 보존 — heal injuryIndex 로 사용).
+  final List<Injury> injuries;
 
   /// 다음 레벨까지 필요 경험치 (백엔드 applyLevelUps: level × 100).
   int get expToNextLevel => level * 100;

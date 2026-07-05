@@ -79,6 +79,7 @@ abstract class QuestDto with _$QuestDto {
 
   const factory QuestDto({
     required String id,
+    @Default('') String npcId,
     @Default('퀘스트') String nameKo,
     @Default('') String descriptionKo,
     @Default(1) int minLevel,
@@ -93,6 +94,7 @@ abstract class QuestDto with _$QuestDto {
 
   Quest toEntity() => Quest(
         id: id,
+        npcId: npcId,
         nameKo: nameKo,
         descriptionKo: descriptionKo,
         minLevel: minLevel,
