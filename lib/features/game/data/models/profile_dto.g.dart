@@ -26,6 +26,7 @@ _ProfileDto _$ProfileDtoFromJson(Map<String, dynamic> json) => _ProfileDto(
   fatigue: (json['fatigue'] as num?)?.toInt() ?? 0,
   maxFatigue: (json['max_fatigue'] as num?)?.toInt() ?? 100,
   currentMapId: json['current_map_id'] as String?,
+  equipment: json['equipment'] as Map<String, dynamic>?,
   character: json['character'] == null
       ? null
       : CharacterInfoDto.fromJson(json['character'] as Map<String, dynamic>),
@@ -42,6 +43,7 @@ Map<String, dynamic> _$ProfileDtoToJson(_ProfileDto instance) =>
       'fatigue': instance.fatigue,
       'max_fatigue': instance.maxFatigue,
       'current_map_id': instance.currentMapId,
+      'equipment': instance.equipment,
       'character': instance.character?.toJson(),
     };
 

@@ -36,3 +36,4 @@ flutter:
     - assets/data/merchants.json
     - assets/data/trainers.json
     - assets/data/shop_items.json
+    - assets/data/items.json

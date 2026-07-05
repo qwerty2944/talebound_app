@@ -302,7 +302,7 @@ $ProfileDtoCopyWith<$Res>? get data {
 /// @nodoc
 mixin _$ProfileDto {
 
- int get level; int get experience; int get gold; int get gems;@JsonKey(name: 'current_hp') int? get currentHp;@JsonKey(name: 'current_mp') int? get currentMp; int get fatigue;@JsonKey(name: 'max_fatigue') int get maxFatigue;@JsonKey(name: 'current_map_id') String? get currentMapId; CharacterInfoDto? get character;
+ int get level; int get experience; int get gold; int get gems;@JsonKey(name: 'current_hp') int? get currentHp;@JsonKey(name: 'current_mp') int? get currentMp; int get fatigue;@JsonKey(name: 'max_fatigue') int get maxFatigue;@JsonKey(name: 'current_map_id') String? get currentMapId; Map<String, dynamic>? get equipment; CharacterInfoDto? get character;
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -315,16 +315,16 @@ $ProfileDtoCopyWith<ProfileDto> get copyWith => _$ProfileDtoCopyWithImpl<Profile
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&(identical(other.character, character) || other.character == character));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other.equipment, equipment)&&(identical(other.character, character) || other.character == character));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,character);
+int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(equipment),character);
 
 @override
 String toString() {
-  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, character: $character)';
+  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character)';
 }
 
 
@@ -335,7 +335,7 @@ abstract mixin class $ProfileDtoCopyWith<$Res>  {
   factory $ProfileDtoCopyWith(ProfileDto value, $Res Function(ProfileDto) _then) = _$ProfileDtoCopyWithImpl;
 @useResult
 $Res call({
- int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, CharacterInfoDto? character
+ int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character
 });
 
 
@@ -352,7 +352,7 @@ class _$ProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? character = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,}) {
   return _then(_self.copyWith(
 level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
@@ -363,7 +363,8 @@ as int?,currentMp: freezed == currentMp ? _self.currentMp : currentMp // ignore:
 as int?,fatigue: null == fatigue ? _self.fatigue : fatigue // ignore: cast_nullable_to_non_nullable
 as int,maxFatigue: null == maxFatigue ? _self.maxFatigue : maxFatigue // ignore: cast_nullable_to_non_nullable
 as int,currentMapId: freezed == currentMapId ? _self.currentMapId : currentMapId // ignore: cast_nullable_to_non_nullable
-as String?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
+as String?,equipment: freezed == equipment ? _self.equipment : equipment // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
 as CharacterInfoDto?,
   ));
 }
@@ -461,10 +462,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  CharacterInfoDto? character)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileDto() when $default != null:
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
   return orElse();
 
 }
@@ -482,10 +483,10 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  CharacterInfoDto? character)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileDto():
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -502,10 +503,10 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  CharacterInfoDto? character)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int level,  int experience,  int gold,  int gems, @JsonKey(name: 'current_hp')  int? currentHp, @JsonKey(name: 'current_mp')  int? currentMp,  int fatigue, @JsonKey(name: 'max_fatigue')  int maxFatigue, @JsonKey(name: 'current_map_id')  String? currentMapId,  Map<String, dynamic>? equipment,  CharacterInfoDto? character)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileDto() when $default != null:
-return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.character);case _:
+return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.currentHp,_that.currentMp,_that.fatigue,_that.maxFatigue,_that.currentMapId,_that.equipment,_that.character);case _:
   return null;
 
 }
@@ -517,7 +518,7 @@ return $default(_that.level,_that.experience,_that.gold,_that.gems,_that.current
 @JsonSerializable()
 
 class _ProfileDto extends ProfileDto {
-  const _ProfileDto({this.level = 1, this.experience = 0, this.gold = 0, this.gems = 0, @JsonKey(name: 'current_hp') this.currentHp, @JsonKey(name: 'current_mp') this.currentMp, this.fatigue = 0, @JsonKey(name: 'max_fatigue') this.maxFatigue = 100, @JsonKey(name: 'current_map_id') this.currentMapId, this.character}): super._();
+  const _ProfileDto({this.level = 1, this.experience = 0, this.gold = 0, this.gems = 0, @JsonKey(name: 'current_hp') this.currentHp, @JsonKey(name: 'current_mp') this.currentMp, this.fatigue = 0, @JsonKey(name: 'max_fatigue') this.maxFatigue = 100, @JsonKey(name: 'current_map_id') this.currentMapId, final  Map<String, dynamic>? equipment, this.character}): _equipment = equipment,super._();
   factory _ProfileDto.fromJson(Map<String, dynamic> json) => _$ProfileDtoFromJson(json);
 
 @override@JsonKey() final  int level;
@@ -529,6 +530,15 @@ class _ProfileDto extends ProfileDto {
 @override@JsonKey() final  int fatigue;
 @override@JsonKey(name: 'max_fatigue') final  int maxFatigue;
 @override@JsonKey(name: 'current_map_id') final  String? currentMapId;
+ final  Map<String, dynamic>? _equipment;
+@override Map<String, dynamic>? get equipment {
+  final value = _equipment;
+  if (value == null) return null;
+  if (_equipment is EqualUnmodifiableMapView) return _equipment;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
 @override final  CharacterInfoDto? character;
 
 /// Create a copy of ProfileDto
@@ -544,16 +554,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&(identical(other.character, character) || other.character == character));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileDto&&(identical(other.level, level) || other.level == level)&&(identical(other.experience, experience) || other.experience == experience)&&(identical(other.gold, gold) || other.gold == gold)&&(identical(other.gems, gems) || other.gems == gems)&&(identical(other.currentHp, currentHp) || other.currentHp == currentHp)&&(identical(other.currentMp, currentMp) || other.currentMp == currentMp)&&(identical(other.fatigue, fatigue) || other.fatigue == fatigue)&&(identical(other.maxFatigue, maxFatigue) || other.maxFatigue == maxFatigue)&&(identical(other.currentMapId, currentMapId) || other.currentMapId == currentMapId)&&const DeepCollectionEquality().equals(other._equipment, _equipment)&&(identical(other.character, character) || other.character == character));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,character);
+int get hashCode => Object.hash(runtimeType,level,experience,gold,gems,currentHp,currentMp,fatigue,maxFatigue,currentMapId,const DeepCollectionEquality().hash(_equipment),character);
 
 @override
 String toString() {
-  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, character: $character)';
+  return 'ProfileDto(level: $level, experience: $experience, gold: $gold, gems: $gems, currentHp: $currentHp, currentMp: $currentMp, fatigue: $fatigue, maxFatigue: $maxFatigue, currentMapId: $currentMapId, equipment: $equipment, character: $character)';
 }
 
 
@@ -564,7 +574,7 @@ abstract mixin class _$ProfileDtoCopyWith<$Res> implements $ProfileDtoCopyWith<$
   factory _$ProfileDtoCopyWith(_ProfileDto value, $Res Function(_ProfileDto) _then) = __$ProfileDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, CharacterInfoDto? character
+ int level, int experience, int gold, int gems,@JsonKey(name: 'current_hp') int? currentHp,@JsonKey(name: 'current_mp') int? currentMp, int fatigue,@JsonKey(name: 'max_fatigue') int maxFatigue,@JsonKey(name: 'current_map_id') String? currentMapId, Map<String, dynamic>? equipment, CharacterInfoDto? character
 });
 
 
@@ -581,7 +591,7 @@ class __$ProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of ProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? character = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? level = null,Object? experience = null,Object? gold = null,Object? gems = null,Object? currentHp = freezed,Object? currentMp = freezed,Object? fatigue = null,Object? maxFatigue = null,Object? currentMapId = freezed,Object? equipment = freezed,Object? character = freezed,}) {
   return _then(_ProfileDto(
 level: null == level ? _self.level : level // ignore: cast_nullable_to_non_nullable
 as int,experience: null == experience ? _self.experience : experience // ignore: cast_nullable_to_non_nullable
@@ -592,7 +602,8 @@ as int?,currentMp: freezed == currentMp ? _self.currentMp : currentMp // ignore:
 as int?,fatigue: null == fatigue ? _self.fatigue : fatigue // ignore: cast_nullable_to_non_nullable
 as int,maxFatigue: null == maxFatigue ? _self.maxFatigue : maxFatigue // ignore: cast_nullable_to_non_nullable
 as int,currentMapId: freezed == currentMapId ? _self.currentMapId : currentMapId // ignore: cast_nullable_to_non_nullable
-as String?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
+as String?,equipment: freezed == equipment ? _self._equipment : equipment // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,character: freezed == character ? _self.character : character // ignore: cast_nullable_to_non_nullable
 as CharacterInfoDto?,
   ));
 }
